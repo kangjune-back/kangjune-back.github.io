@@ -18,8 +18,9 @@
 <body>
   <h1>다이나믹 배너 — 혜미님 레이아웃 가이드 전 케이스 검증</h1>
   <p>배너 4~14 (파트너 136262) · 태그 width/height 오버라이드로 케이스별 크기 재현</p>
+  <p><b>A파트 = JS 태그 방식</b> (new MrtPartners.G) · <b>B파트 = iframe 직접 삽입 방식</b> — 같은 11케이스 두 벌</p>
 
-  <h2>1. 2줄처리 — height가 (상품 2개 height + 간격 12px) 넘기면 +1줄</h2>
+  <h2>A-1. [JS] 2줄처리 — height가 (상품 2개 height + 간격 12px) 넘기면 +1줄</h2>
 
   <div class="case">
     <p><b>배너 4 · 700×180</b> — 1줄 가로 스크롤, 카드 120×156, 진입버튼 TALL(카드형·높이 전체)</p>
@@ -36,7 +37,7 @@
     <script>new MrtPartners.G({ id: 6, trackingCode: "MRTW-39e2843c62cb48a7bcffa211ce7d6160", width: 600, height: 380, bordered: true });</script>
   </div>
 
-  <h2>2. 상품 10개 이하로 노출 — 가로 스크롤 · 세로 잘림</h2>
+  <h2>A-2. [JS] 상품 10개 이하로 노출 — 가로 스크롤 · 세로 잘림</h2>
 
   <div class="case">
     <p><b>배너 7 · 800×270</b> — 가이드 예시 그대로. 카드 폭 최소값 120 고정 + 가로 스크롤</p>
@@ -53,7 +54,7 @@
     <script>new MrtPartners.G({ id: 9, trackingCode: "MRTW-39e2843c62cb48a7bcffa211ce7d6160", width: 330, height: 700, bordered: true });</script>
   </div>
 
-  <h2>3. 상품 10개 다 노출 — 격자, 카드 120×180~280×344 사이 조절</h2>
+  <h2>A-3. [JS] 상품 10개 다 노출 — 격자, 카드 120×180~280×344 사이 조절</h2>
 
   <div class="case">
     <p><b>배너 10 · 540×564</b> — 가이드 "180×3 + 간격 12×2". 4열×3줄 격자, 최소 카드 120×172, 진입카드 CARD형</p>
@@ -75,11 +76,69 @@
     <script>new MrtPartners.G({ id: 14, trackingCode: "MRTW-39e2843c62cb48a7bcffa211ce7d6160", width: 2000, height: 800, bordered: true });</script>
   </div>
 
-  <h2>4. 상품 개수가 적은 경우 — 최대 카드 + 마이리얼트립 진입 카드</h2>
+  <h2>A-4. [JS] 상품 개수가 적은 경우 — 최대 카드 + 마이리얼트립 진입 카드</h2>
 
   <div class="case">
     <p><b>배너 13 (직접선택·상품 1개) · 680×380</b> — 카드 최대값 280×344 + 진입카드 CARD형이 뒤따름</p>
     <script>new MrtPartners.G({ id: 13, trackingCode: "MRTW-39e2843c62cb48a7bcffa211ce7d6160", width: 680, height: 380, bordered: true });</script>
+  </div>
+
+  <h2>B. iframe 직접 삽입 방식 — 같은 11케이스 (g.js 미사용)</h2>
+  <p>widgets.html을 iframe src로 직접 지정. 크기는 iframe 속성으로 고정 (resize postMessage 수신자 없음)</p>
+
+  <div class="case">
+    <p><b>[iframe] 배너 4 · 700×180</b> — 1줄 가로 스크롤</p>
+    <iframe src="https://ads-partners.test-myrealtrip.com/widgets.html?id=4&trackingCode=MRTW-39e2843c62cb48a7bcffa211ce7d6160&width=700&height=180&bordered=true" width="700" height="180" style="border:0;max-width:100%" loading="lazy" title="mrt-widget-4"></iframe>
+  </div>
+
+  <div class="case">
+    <p><b>[iframe] 배너 5 · 600×240</b> — 1줄 큰 카드</p>
+    <iframe src="https://ads-partners.test-myrealtrip.com/widgets.html?id=5&trackingCode=MRTW-39e2843c62cb48a7bcffa211ce7d6160&width=600&height=240&bordered=true" width="600" height="240" style="border:0;max-width:100%" loading="lazy" title="mrt-widget-5"></iframe>
+  </div>
+
+  <div class="case">
+    <p><b>[iframe] 배너 6 · 600×380</b> — 2줄 스크롤</p>
+    <iframe src="https://ads-partners.test-myrealtrip.com/widgets.html?id=6&trackingCode=MRTW-39e2843c62cb48a7bcffa211ce7d6160&width=600&height=380&bordered=true" width="600" height="380" style="border:0;max-width:100%" loading="lazy" title="mrt-widget-6"></iframe>
+  </div>
+
+  <div class="case">
+    <p><b>[iframe] 배너 7 · 800×270</b> — 카드폭 120 고정 스크롤</p>
+    <iframe src="https://ads-partners.test-myrealtrip.com/widgets.html?id=7&trackingCode=MRTW-39e2843c62cb48a7bcffa211ce7d6160&width=800&height=270&bordered=true" width="800" height="270" style="border:0;max-width:100%" loading="lazy" title="mrt-widget-7"></iframe>
+  </div>
+
+  <div class="case">
+    <p><b>[iframe] 배너 8 · 120×700</b> — 세로 1열×3개, BAR_SIMPLE</p>
+    <iframe src="https://ads-partners.test-myrealtrip.com/widgets.html?id=8&trackingCode=MRTW-39e2843c62cb48a7bcffa211ce7d6160&width=120&height=700&bordered=true" width="120" height="700" style="border:0;max-width:100%" loading="lazy" title="mrt-widget-8"></iframe>
+  </div>
+
+  <div class="case">
+    <p><b>[iframe] 배너 9 · 330×700</b> — 세로 2열×3줄, BAR</p>
+    <iframe src="https://ads-partners.test-myrealtrip.com/widgets.html?id=9&trackingCode=MRTW-39e2843c62cb48a7bcffa211ce7d6160&width=330&height=700&bordered=true" width="330" height="700" style="border:0;max-width:100%" loading="lazy" title="mrt-widget-9"></iframe>
+  </div>
+
+  <div class="case">
+    <p><b>[iframe] 배너 10 · 540×564</b> — 4열×3줄 격자</p>
+    <iframe src="https://ads-partners.test-myrealtrip.com/widgets.html?id=10&trackingCode=MRTW-39e2843c62cb48a7bcffa211ce7d6160&width=540&height=564&bordered=true" width="540" height="564" style="border:0;max-width:100%" loading="lazy" title="mrt-widget-10"></iframe>
+  </div>
+
+  <div class="case">
+    <p><b>[iframe] 배너 11 · 430×800</b> — 세로 격자 3열×4줄</p>
+    <iframe src="https://ads-partners.test-myrealtrip.com/widgets.html?id=11&trackingCode=MRTW-39e2843c62cb48a7bcffa211ce7d6160&width=430&height=800&bordered=true" width="430" height="800" style="border:0;max-width:100%" loading="lazy" title="mrt-widget-11"></iframe>
+  </div>
+
+  <div class="case">
+    <p><b>[iframe] 배너 12 · 1600×400</b> — 2줄 252×182</p>
+    <iframe src="https://ads-partners.test-myrealtrip.com/widgets.html?id=12&trackingCode=MRTW-39e2843c62cb48a7bcffa211ce7d6160&width=1600&height=400&bordered=true" width="1600" height="400" style="border:0;max-width:100%" loading="lazy" title="mrt-widget-12"></iframe>
+  </div>
+
+  <div class="case">
+    <p><b>[iframe] 배너 14 · 2000×800</b> — 2줄 280×344 최대</p>
+    <iframe src="https://ads-partners.test-myrealtrip.com/widgets.html?id=14&trackingCode=MRTW-39e2843c62cb48a7bcffa211ce7d6160&width=2000&height=800&bordered=true" width="2000" height="800" style="border:0;max-width:100%" loading="lazy" title="mrt-widget-14"></iframe>
+  </div>
+
+  <div class="case">
+    <p><b>[iframe] 배너 13 (직접선택·상품 1개) · 680×380</b> — 최대 카드 + 진입카드</p>
+    <iframe src="https://ads-partners.test-myrealtrip.com/widgets.html?id=13&trackingCode=MRTW-39e2843c62cb48a7bcffa211ce7d6160&width=680&height=380&bordered=true" width="680" height="380" style="border:0;max-width:100%" loading="lazy" title="mrt-widget-13"></iframe>
   </div>
 
   <footer>
