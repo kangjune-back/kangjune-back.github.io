@@ -3,35 +3,87 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>여행 이야기 블로그</title>
+  <title>다이나믹 배너 레이아웃 케이스 검증</title>
   <style>
-    body { max-width: 760px; margin: 0 auto; padding: 24px; font-family: -apple-system, "Apple SD Gothic Neo", sans-serif; line-height: 1.7; color: #222; }
-    h1 { font-size: 28px; }
-    .post { margin-bottom: 48px; }
-    .ad-slot { margin: 32px 0; }
-    footer { color: #888; font-size: 13px; border-top: 1px solid #eee; padding-top: 16px; }
+    body { margin: 0 auto; padding: 24px; font-family: -apple-system, "Apple SD Gothic Neo", sans-serif; line-height: 1.6; color: #222; }
+    h1 { font-size: 24px; }
+    h2 { font-size: 18px; margin: 48px 0 8px; padding: 8px 12px; background: #e8590c; color: #fff; border-radius: 6px; }
+    .case { margin: 28px 0; }
+    .case p { margin: 0 0 8px; font-size: 14px; color: #555; }
+    .case b { color: #111; }
+    footer { color: #888; font-size: 13px; border-top: 1px solid #eee; padding-top: 16px; margin-top: 48px; }
   </style>
+  <script src="https://ads-partners.test-myrealtrip.com/g.js"></script>
 </head>
 <body>
-  <h1>여행 이야기 블로그</h1>
-  <p>외부 지면 다이나믹 배너 테스트용 페이지입니다.</p>
+  <h1>다이나믹 배너 — 혜미님 레이아웃 가이드 전 케이스 검증</h1>
+  <p>배너 4~14 (파트너 136262) · 태그 width/height 오버라이드로 케이스별 크기 재현</p>
 
-  <div class="post">
-    <h2>오사카 3박 4일 후기</h2>
-    <p>지난달 오사카를 다녀왔다. 유니버설 스튜디오는 평일에 가는 것을 추천한다.
-    도톤보리의 야경과 먹거리도 빼놓을 수 없다. 다음에는 교토까지 함께 둘러보고 싶다.</p>
+  <h2>1. 2줄처리 — height가 (상품 2개 height + 간격 12px) 넘기면 +1줄</h2>
 
-    <!-- 다이나믹 배너: 자바스크립트 태그 -->
-    <div class="ad-slot">
-      <script src="https://ads-partners.test-myrealtrip.com/g.js"></script>
-      <script>
-        new MrtPartners.G({ id: 1, trackingCode: "MRTW-0af1c2d3e4f5061728394a5b6c7d8e9f", template: "carousel", width: 680, height: 200, bordered: true });
-      </script>
-    </div>
+  <div class="case">
+    <p><b>배너 4 · 700×180</b> — 1줄 가로 스크롤, 카드 120×156, 진입버튼 TALL(카드형·높이 전체)</p>
+    <script>new MrtPartners.G({ id: 4, trackingCode: "MRTW-39e2843c62cb48a7bcffa211ce7d6160", width: 700, height: 180, bordered: true });</script>
+  </div>
+
+  <div class="case">
+    <p><b>배너 5 · 600×240</b> — 아직 1줄(2개 높이 못 넘음), 카드가 세로로 커짐 120×216</p>
+    <script>new MrtPartners.G({ id: 5, trackingCode: "MRTW-39e2843c62cb48a7bcffa211ce7d6160", width: 600, height: 240, bordered: true });</script>
+  </div>
+
+  <div class="case">
+    <p><b>배너 6 · 600×380</b> — 2줄 스크롤 (가이드 예시), 카드 120×172</p>
+    <script>new MrtPartners.G({ id: 6, trackingCode: "MRTW-39e2843c62cb48a7bcffa211ce7d6160", width: 600, height: 380, bordered: true });</script>
+  </div>
+
+  <h2>2. 상품 10개 이하로 노출 — 가로 스크롤 · 세로 잘림</h2>
+
+  <div class="case">
+    <p><b>배너 7 · 800×270</b> — 가이드 예시 그대로. 카드 폭 최소값 120 고정 + 가로 스크롤</p>
+    <script>new MrtPartners.G({ id: 7, trackingCode: "MRTW-39e2843c62cb48a7bcffa211ce7d6160", width: 800, height: 270, bordered: true });</script>
+  </div>
+
+  <div class="case">
+    <p><b>배너 8 · 120×700</b> — 가이드 "가로120" 예시. 여백 0으로 카드 살림, 1열×3개 잘림, 진입버튼 BAR_SIMPLE(로고+›)</p>
+    <script>new MrtPartners.G({ id: 8, trackingCode: "MRTW-39e2843c62cb48a7bcffa211ce7d6160", width: 120, height: 700, bordered: true });</script>
+  </div>
+
+  <div class="case">
+    <p><b>배너 9 · 330×700</b> — 가이드 "가로330 세로700" 예시. 2열×3줄 6개 잘림, 진입버튼 BAR(기본형·상품 더 보기)</p>
+    <script>new MrtPartners.G({ id: 9, trackingCode: "MRTW-39e2843c62cb48a7bcffa211ce7d6160", width: 330, height: 700, bordered: true });</script>
+  </div>
+
+  <h2>3. 상품 10개 다 노출 — 격자, 카드 120×180~280×344 사이 조절</h2>
+
+  <div class="case">
+    <p><b>배너 10 · 540×564</b> — 가이드 "180×3 + 간격 12×2". 4열×3줄 격자, 최소 카드 120×172, 진입카드 CARD형</p>
+    <script>new MrtPartners.G({ id: 10, trackingCode: "MRTW-39e2843c62cb48a7bcffa211ce7d6160", width: 540, height: 564, bordered: true });</script>
+  </div>
+
+  <div class="case">
+    <p><b>배너 11 · 430×800</b> — 가이드 "height 344 이상: 상품 1줄 추가". 세로 격자 3열×4줄, 카드 127×185</p>
+    <script>new MrtPartners.G({ id: 11, trackingCode: "MRTW-39e2843c62cb48a7bcffa211ce7d6160", width: 430, height: 800, bordered: true });</script>
+  </div>
+
+  <div class="case">
+    <p><b>배너 12 · 1600×400</b> — 가이드 "상품 최소값 넘으면 1줄씩 추가". 1줄 좁은 카드 대신 2줄 252×182 선택</p>
+    <script>new MrtPartners.G({ id: 12, trackingCode: "MRTW-39e2843c62cb48a7bcffa211ce7d6160", width: 1600, height: 400, bordered: true });</script>
+  </div>
+
+  <div class="case">
+    <p><b>배너 14 · 2000×800</b> — 만차 + 큰 배너. 2줄 격자, 카드 최대값 280×344에서 멈춤</p>
+    <script>new MrtPartners.G({ id: 14, trackingCode: "MRTW-39e2843c62cb48a7bcffa211ce7d6160", width: 2000, height: 800, bordered: true });</script>
+  </div>
+
+  <h2>4. 상품 개수가 적은 경우 — 최대 카드 + 마이리얼트립 진입 카드</h2>
+
+  <div class="case">
+    <p><b>배너 13 (직접선택·상품 1개) · 680×380</b> — 카드 최대값 280×344 + 진입카드 CARD형이 뒤따름</p>
+    <script>new MrtPartners.G({ id: 13, trackingCode: "MRTW-39e2843c62cb48a7bcffa211ce7d6160", width: 680, height: 380, bordered: true });</script>
   </div>
 
   <footer>
-    마이리얼트립과 함께하는 마케팅 파트너십을 통해, 여행자가 구매할 때마다 일정 비율의 수수료를 지급받습니다.
+    외부 지면 다이나믹 배너 테스트 페이지 · 마이리얼트립과 함께하는 마케팅 파트너십을 통해, 여행자가 구매할 때마다 일정 비율의 수수료를 지급받습니다.
   </footer>
 </body>
 </html>
