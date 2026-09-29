@@ -20,9 +20,23 @@
   <p>파트너 111563 · 배너 1 (관심사 추천 캐러셀) · 태그 width/height 오버라이드로 케이스별 크기 재현</p>
   <p><b>A파트 = JS 태그 방식</b> (new MrtPartners.G) · <b>B파트 = iframe 직접 삽입 방식</b> — 같은 케이스 두 벌</p>
 
+  <h2>S. [직접선택] 배너 2 — 상품 직접 선택 (내가 고른 상품들, 중복 gid 포함)</h2>
+  <div class="case">
+    <p><b>[JS] 배너 2 · 680×200</b> — SELECTED_PRODUCT. 담은 상품 순서(sort_order)대로 노출, 개인화 이력 무관</p>
+    <script>new MrtPartners.G({ id: 2, trackingCode: "MRTW-fd47426ffc3d4812a8becaad5599a249", width: 680, height: 200, bordered: true });</script>
+  </div>
+  <div class="case">
+    <p><b>[JS] 배너 2 · 540×564 격자</b> — 직접선택 상품이 격자로 어떻게 채워지는지</p>
+    <script>new MrtPartners.G({ id: 2, trackingCode: "MRTW-fd47426ffc3d4812a8becaad5599a249", width: 540, height: 564, bordered: true });</script>
+  </div>
+  <div class="case">
+    <p><b>[iframe] 배너 2 · 680×200</b></p>
+    <iframe src="https://ads-partners.myrealtrip.com/widgets.html?id=2&trackingCode=MRTW-fd47426ffc3d4812a8becaad5599a249&width=680&height=200&bordered=true" width="680" height="200" style="border:0;max-width:100%" loading="lazy" referrerpolicy="origin" title="mrt-widget-selected-680x200"></iframe>
+  </div>
+
   <h2>A-0. [JS] 기본 — 680×200 (배너 원 사이즈)</h2>
   <div class="case">
-    <p><b>배너 1 · 680×200</b> — 파트너 화면에서 등록한 사이즈 그대로</p>
+    <p><b>배너 1 · 680×200</b> — 파트너 화면에서 등록한 사이즈 그대로 (관심사 추천)</p>
     <script>new MrtPartners.G({ id: 1, trackingCode: "MRTW-fd47426ffc3d4812a8becaad5599a249", width: 680, height: 200, bordered: true });</script>
   </div>
 
